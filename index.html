@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nicole's Website</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles */
+        nav {
+            display: flex;
+            justify-content: center;
+            padding: 2rem 0;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .home-nav {
+            position: absolute;
+            top: 75%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: transparent;
+            box-shadow: none;
+            width: auto;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+        }
+
+        nav a:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        .home-nav a {
+            color: #333;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+        }
+
+        .home-nav a:hover {
+            background-color: #333;
+            color: white;
+        }
+
+        /* Page Sections */
+        section {
+            min-height: 100vh;
+            padding: 80px 20px 20px;
+            display: none;
+        }
+
+        .active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Homepage Styles */
+        #home {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://source.unsplash.com/random/1600x900/?landscape');
+            background-size: cover;
+            background-position: center;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+            margin-top: 80px;
+        }
+
+        #home p {
+            font-size: 1.5rem;
+            max-width: 700px;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            top: auto;
+            left: auto;
+            transform: none;
+        }
+
+        /* GIF Player Styles */
+        #gif-player {
+            width: 80%;
+            max-width: 500px;
+            margin: 1rem auto 3rem;
+            aspect-ratio: 1/1;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #000;
+            border: 3px solid white;
+        }
+
+        /* Personal Bio Page */
+        #personal-bio {
+            background-color: #ffedf2;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid rgb(255, 214, 226);
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 10px rgba(255, 214, 226);
+        }
+
+        .bio-details {
+            width: 100%;
+            text-align: center;
+        }
+
+        .bio-details h2 {
+            color: rgb(232, 116, 151);
+            margin-bottom: 1.5rem;
+            font-size: 2.2rem;
+        }
+
+        .bio-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            text-align: left;
+            margin-top: 1.5rem;
+        }
+
+        .bio-info div {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid rgb(255, 189, 199);
+        }
+
+        .bio-info strong {
+            color: rgb(189, 28, 98);
+        }
+
+        /* Fun Facts Box */
+        .fun-facts {
+            grid-column: span 2;
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid rgb(255, 189, 199);
+            margin-top: 1rem;
+        }
+
+        .fun-facts h3 {
+            color: rgb(189, 28, 98);
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        /* Niki Bio Page */
+        #niki-bio {
+            background-color: #faf0de;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .artist-container {
+            max-width: 800px;
+            width: 100%;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        .artist-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .artist-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 2rem;
+            border: 4px solid #7a6a49;
+            align-items: center;
+        }
+
+        .artist-info h2 {
+            color: #9a875a;
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .artist-info p {
+            color: #666;
+            font-style: italic;
+        }
+
+        .artist-bio {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .artist-bio div {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid #8b7e67;
+        }
+
+        .artist-bio strong {
+            color: #a0793f;
+        }
+
+        /* List styles */
+        ul, ol {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        li {
+            margin-bottom: 3px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: #333;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="mainNav" class="home-nav">
+        <ul>
+            <li><a href="#" class="nav-link" data-target="home">Home</a></li>
+            <li><a href="#" class="nav-link" data-target="personal-bio">Personal Bio</a></li>
+            <li><a href="#" class="nav-link" data-target="niki-bio">Niki Bio</a></li>
+        </ul>
+    </nav>
+
+    <!-- Homepage -->
+    <section id="home" class="active">
+        <h1>Welcome to My Website</h1>
+        <p>Explore my personal profile and favorite artist</p>
+        
+        <!-- GIF Player -->
+        <div id="gif-player">
+            <img src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExenAwdXZxZTJzMTI5ZnRnaWtsYndnYjlqZWZqY2V6OGI2YXg0anlsbyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lXOI5Bj5bndSw/giphy.gif" alt="Fun GIF" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+    </section>
+
+    <!-- Personal Bio Page -->
+    <section id="personal-bio">
+        <div class="profile-container">
+            <img src="pap.jpg" alt="Nicole's Profile" class="profile-pic">
+            <div class="bio-details">
+                <h2>Nicole's Biography</h2>
+                <div class="bio-info">
+                    <div><strong>Name:</strong> Nicole</div>
+                    <div><strong>Age:</strong> 14</div>
+                    <div><strong>Grade:</strong> 8</div>
+                    <div><strong>Date of Birth:</strong> May 2, 2011</div>
+                    <div><strong>Favorite Colors:</strong> 
+                        <ul>
+                            <li>Navy blue</li>
+                            <li>Maroon</li>
+                            <li>Light blue</li>
+                        </ul>
+                    </div>
+                    <div><strong>Pets:</strong>
+                        <ul>
+                            <li>Turtle (2)</li>
+                            <li>Goldfish (3)</li>
+                            <li>Betta fish (1)</li>
+                        </ul>
+                    </div>
+                    <div><strong>Favorite Songs:</strong>
+                        <ol>
+                            <li>Lowkey - NIKI</li>
+                            <li>Get You - Daniel Caesar</li>
+                            <li>Lantas - Juicy Luicy</li>
+                        </ol>
+                    </div>
+                    <div class="fun-facts">
+                        <h3>Fun Facts</h3>
+                        <ul>
+                            <li>Loves sashimi</li>
+                            <li>Loves peaches and Tasmanian cherries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Niki Bio Page -->
+    <section id="niki-bio">
+        <div class="artist-container">
+            <div class="artist-header">
+                <img src="niki.jpg" alt="Niki" class="artist-pic">
+                <div class="artist-info">
+                    <h2>Niki</h2>
+                    <p>Indonesian singer-songwriter and producer</p>
+                </div>
+            </div>
+            <div class="artist-bio">
+                <div><strong>Name:</strong> Nicole Zefanya (NIKI)</div>
+                <div><strong>Born:</strong> January 24, 1999</div>
+                <div><strong>Origin:</strong> Jakarta, Indonesia</div>
+                <div><strong>Genres:</strong> 
+                    <ul>
+                        <li>R&B</li>
+                        <li>Pop</li>
+                        <li>Bedroom pop</li>
+                    </ul>
+                </div>
+                <div><strong>Labels:</strong> 
+                    <ul>
+                        <li>88rising</li>
+                        <li>Capitol Records</li>
+                    </ul>
+                </div>
+                <div><strong>Popular Songs:</strong>
+                    <ol>
+                        <li>Lowkey</li>
+                        <li>Indigo</li>
+                        <li>Oceans & Engines</li>
+                    </ol>
+                </div>
+                <div><strong>Notable Fact:</strong> First Indonesian artist signed to major US label</div>
+                <div><strong>Festivals:</strong>
+                    <ul>
+                        <li>Coachella</li>
+                        <li>Head in the Clouds</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2023 Nicole's Website. All rights reserved.
+    </footer>
+
+    <script>
+        // Navigation Script
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+            const mainNav = document.getElementById('mainNav');
+
+            function showSection(sectionId) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(sectionId).classList.add('active');
+                
+                if (sectionId === 'home') {
+                    mainNav.classList.add('home-nav');
+                } else {
+                    mainNav.classList.remove('home-nav');
+                }
+            }
+
+            showSection('home');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.getAttribute('data-target');
+                    showSection(target);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
